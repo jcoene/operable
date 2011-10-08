@@ -58,17 +58,17 @@ That's it! You can call operable_on multiple times to add more fields.
 Four operations are provided: `+`, `-`, `*`, `/`.
 
 ```ruby
-red = Color.new   :r => 128, :g => 0,   :b => 0
+red =   Color.new :r => 128, :g => 0,   :b => 0
 green = Color.new :r => 0,   :g => 128, :b => 0
-blue = Color.new  :r => 0,   :g => 0,   :b => 128
+blue =  Color.new :r => 0,   :g => 0,   :b => 128
 
-yellow = green + red # => #<Color r: 128, g: 128, b: 0>
-grey = yellow + blue # => #<Color r: 128, g: 128, b: 128>
+yellow =     green + red # => #<Color r: 128, g: 128, b: 0>
+grey =       yellow + blue # => #<Color r: 128, g: 128, b: 128>
 bright_red = red * 2 # => #<Color r: 255, g: 0,   b: 0>
-dark_grey = grey / 3 # => #<Color r: 43,  g: 43,  b: 43>
+dark_grey =  grey / 3 # => #<Color r: 43,  g: 43,  b: 43>
 ```
 
-## Equality
+## Testing Equality
 
 Compare the equality of operable objects with the `matches?` method:
 
@@ -79,7 +79,8 @@ purple.matches?(red + blue)  #=> true
 purple.matches?(red + green) #=> false
 ```
 
-### Operate On All (Mongoid only)
+
+## Operate On All (Mongoid only)
 
 Mongoid models define their fields explicitly in the model declaration. We can use this to automatically determine what to operate on:
 
@@ -95,11 +96,16 @@ class Team
 end
 ```
 
-### Operate On Associations (Mongoid only)
+## Operate On Associations (Mongoid only)
 
 We can include associations in our list of operable fields just as with normal attributes!
 
-First, include Operable on **both** documents. Then, on the **parent** document, manually specify the name of the association to *operable_on* (associations are not included by *operable_on_all* methods)
+To operate on associations:
+
+1. Include Operable on **both** document classes.
+2. Manually specify the name of the association on the **parent** document using *operable_on*
+
+NOTE: associations are not included by *operable_on_all* methods, you need to manually add them.
 
 ```ruby
 class First
