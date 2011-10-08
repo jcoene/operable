@@ -164,7 +164,7 @@ describe Operable do
         (@c1 + @c4).population.should eql @c1.population
         (@c1 - @c4).population.should eql @c1.population
         (@c4 + @c2).population.should eql @c2.population
-        (@c4 - @c2).population.should eql (-@c2.population)
+        (@c4 - @c2).population.should eql(-@c2.population)
       end
 
     end
