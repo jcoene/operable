@@ -6,11 +6,7 @@ An easy way to perform simple operations (addition, subtraction, multiplication,
 
 ## A Simple Example
 
-Let's say we're collecting records of Baseball games. A `Team` model has various stats like `W`, `L`, `T`, etc.
-
-Operable, once included in your models, lets you use the `+`, `-`, `*` and `/` operators on them, just as you would an Integer. It returns in the value of the class you're already working with.
-
-We might imagine something like this:
+Let's say we're collecting records of Baseball games. A `Team` model has various stats like `W`, `L`, `T`, etc. Including Operable in your model definition lets you use the `+`, `-`, `*` and `/` operators on objects just as you would on primatives, returning a new instance of the model class containing the result of your desired operation.
 
 ```ruby
 # Create team instances for the 2 NY baseball teams:
