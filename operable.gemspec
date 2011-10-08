@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors = ['Jason Coene']
   s.email = ['jcoene@gmail.com']
   s.homepage = 'http://github.com/jcoene/operable'
-  s.summary = 'Convenient operations for your models.'
-  s.description = 'Operable is the easiest way to perform common operations on multiple instances of a model.'
+  s.summary = 'Arithmetic operations on your models.'
+  s.description = 'Perform addition, subtraction, multiplication and division on your models.'
 
   s.add_dependency 'activemodel', '~> 3.0'
 
