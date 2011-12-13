@@ -13,8 +13,17 @@ module Operable
       attributes.select {|k, v| self.class.operable_fields.include? k }.each do |k, v|
         values[k.to_s] = v
       end
+
+      if respond_to?(:reflections)
+        reflections.select {|k, v| self.class.operable_fields.include? k.to_s }.each do |k, v|
+          if self.send(k).present?
+            values[k.to_s] = send(k)
+          end
+        end
+      end
+
       if respond_to?(:associations)
-        associations.select {|k, v| self.class.operable_fields.include? k }.each do |k, v|
+        associations.select {|k, v| self.class.operable_fields.include? k.to_s }.each do |k, v|
           values[k.to_s] = send(k)
         end
       end

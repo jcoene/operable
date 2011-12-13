@@ -96,7 +96,7 @@ class Team
 end
 ```
 
-## Operate On Associations (Mongoid only)
+## Operate On Associations
 
 We can include associations in our list of operable fields just as with normal attributes!
 
@@ -132,6 +132,8 @@ f2 = First.new :a => 2, :b => 3, :second => Second.new(:c => 2, :d => 3)
 f3 = f1 + f2  # => #<First a: 3, b: 5>
 f3.second     # => #<Second c: 3, d: 5>
 ```
+
+This feature now works with ActiveRecord as well.
 
 ## Enhancements and Pull Requests
 

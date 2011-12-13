@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column :revenue, :float
     t.column :established, :date
   end
+  create_table :dumps do |t|
+    t.column :city_id, :integer
+    t.column :employees, :integer
+    t.column :weight, :integer
+  end
   create_table :towns do |t|
     t.column :population, :integer
     t.column :revenue, :float

@@ -86,7 +86,14 @@ end
 
 class City < ActiveRecord::Base
   include Operable
-  operable_on :population, :revenue
+  has_one :dump
+  operable_on :population, :revenue, :dump
+end
+
+class Dump < ActiveRecord::Base
+  include Operable
+  belongs_to :city
+  operable_on :employees, :weight
 end
 
 describe Operable do
@@ -219,7 +226,7 @@ describe Operable do
         SecondBusiness.operable_fields.sort.should eql %w[employees revenue taxes]
       end
 
-      it 'can process associations' do
+      it 'can process singular associations' do
         f1 = First.new :second => Second.new(:c => 1, :d => 2)
         f2 = First.new :second => Second.new(:c => 2, :d => 3)
         f = f1 + f2
@@ -255,6 +262,21 @@ describe Operable do
             operable_on_all
           end
         end.should raise_error(RuntimeError, "Unable to list all fields for this ORM")
+      end
+
+      it 'can process singular associations' do
+        c1 = City.new :population => 1, :revenue => 1, :dump => Dump.new(:employees => 1, :weight => 6)
+        c2 = City.new :population => 4, :revenue => 4, :dump => Dump.new(:employees => 6, :weight => 14)
+        c3 = (c1 + c2)
+        c4 = (c1 - c2)
+        c3.dump.employees.should eql 7
+        c3.dump.weight.should eql 20
+        c4.dump.employees.should eql -5
+        c4.dump.weight.should eql -8
+      end
+
+      it 'ignores nil associations' do
+        (@c1 + @c2).dump.should be_nil
       end
 
     end
