@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.summary = 'Arithmetic operations on your models.'
   s.description = 'Perform addition, subtraction, multiplication and division on your models.'
 
-  s.add_dependency 'activemodel', '~> 3.1.0'
+  s.add_dependency 'activemodel', '~> 3.0'
 
-  s.add_development_dependency 'activerecord', '~> 3.1.0'
+  s.add_development_dependency 'activerecord', '~> 3.0'
   s.add_development_dependency 'mongoid', '~> 2.3'
   s.add_development_dependency 'bson_ext', '~> 1.4'
-  s.add_development_dependency 'sqlite3', '~> 1.3'
+  s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'growl'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 2.8.0.rc1'
