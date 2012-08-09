@@ -16,7 +16,7 @@ module Operable
 
   module ClassMethods
 
-    INOPERABLE_FIELDS = %w[_type _id created_at updated_at version]
+    INOPERABLE_FIELDS = %w[_type _id id created_at updated_at version]
 
     def operable_on(*names)
       fields = operable_fields || []
@@ -24,8 +24,15 @@ module Operable
     end
 
     def operable_on_all
-      raise "Unable to list all fields for this ORM" unless respond_to?(:fields)
-      self.operable_fields = fields.keys.reject {|k| INOPERABLE_FIELDS.include? k }
+      if respond_to?(:fields)
+        self.operable_fields = fields.keys.reject {|k| INOPERABLE_FIELDS.include? k }
+      elsif respond_to?(:columns)
+        self.operable_fields = columns.select do |c|
+          [:integer, :float, :decimal].include? c.type
+        end.map(&:name).reject {|k| INOPERABLE_FIELDS.include? k }
+      else
+        raise "Unable to list all fields for this ORM"
+      end
     end
 
     def operable_on_all_except(*names)

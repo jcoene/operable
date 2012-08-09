@@ -96,6 +96,11 @@ class Dump < ActiveRecord::Base
   operable_on :employees, :weight
 end
 
+class Town < ActiveRecord::Base
+  include Operable
+  operable_on_all
+end
+
 describe Operable do
 
   describe 'fields' do
@@ -255,13 +260,8 @@ describe Operable do
         c.revenue.should be_a(Float)
       end
 
-      it 'cannot guess operable fields' do
-        lambda do
-          class Town < ActiveRecord::Base
-            include Operable
-            operable_on_all
-          end
-        end.should raise_error(RuntimeError, "Unable to list all fields for this ORM")
+      it 'can guess operable fields' do
+        Town.operable_fields.sort.should eql %w[population revenue]
       end
 
       it 'can process singular associations' do
