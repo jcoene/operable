@@ -12,8 +12,10 @@ module Operable
 
       self.class.new.tap do |o|
         operable_values.each do |k,v|
-          o.send("#{k}=", (v || 0).send(method, (other.send(k) || 0)))
-          # o[k] = (v || 0).send(method, (other[k] || 0))
+          our_value = v || 0
+          other_value = other.respond_to?(k) ? other.send(k) : 0
+
+          o.send("#{k}=", our_value.send(method, other_value || 0))
         end
       end
     end

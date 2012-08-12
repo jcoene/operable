@@ -188,6 +188,9 @@ describe Operable do
         [@c1, @c2, nil, @c3].sum.population.should eql (@c1.population + @c2.population + @c3.population)
       end
 
+      it 'handles zero objects as part of an enumerable' do
+        [@c1, @c2, 0, @c3].sum.population.should eql (@c1.population + @c2.population + @c3.population)
+      end
     end
 
     describe 'multiplication and division' do
