@@ -179,6 +179,15 @@ describe Operable do
         (@c4 - @c2).population.should eql(-@c2.population)
       end
 
+      it 'handles nil objects' do
+        (@c1 + nil).population.should eql @c1.population
+        (@c1 - nil).population.should eql @c1.population
+      end
+
+      it 'handles nil objects as part of an enumerable' do
+        [@c1, @c2, nil, @c3].sum.population.should eql (@c1.population + @c2.population + @c3.population)
+      end
+
     end
 
     describe 'multiplication and division' do

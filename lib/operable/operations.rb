@@ -8,6 +8,8 @@ module Operable
     #
     # Returns the resulting object
     def add_or_subtract(method, other)
+      return self unless other
+
       self.class.new.tap do |o|
         operable_values.each do |k,v|
           o.send("#{k}=", (v || 0).send(method, (other.send(k) || 0)))
