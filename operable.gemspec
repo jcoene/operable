@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary = 'Arithmetic operations on your models.'
   s.description = 'Perform addition, subtraction, multiplication and division on your models.'
 
-  s.add_dependency 'activemodel', '~> 3.0'
+  s.add_dependency 'activemodel', '>= 3.0'
 
   s.add_development_dependency 'activerecord', '~> 3.0'
   s.add_development_dependency 'mongoid', '~> 2.3'
